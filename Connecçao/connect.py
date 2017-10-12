@@ -82,9 +82,12 @@ class Connect:
             else:
                 print(" ")
                 print("Option indisponivel")
-            
+            if wlan.isconnected() == False:
+                print("Nao consegui estabelecer coneccao, repita o processo por favor")
+                print(" ")
             loop = input("Deseja repetir o processo de coneccao: YES (y), NO (n)")
             if loop == "y":
+                print("\n" * 25)
                 wlan.disconnect()
 
 
@@ -109,7 +112,9 @@ class Connect:
         arqload.append(newdata)
 
         print ("Nova rede adicionada, sua lista atualizada e: ")
-        print (arqload)
+        for i in range (len(arqload)):
+            print(arqload[i]["SSID"])
+            print(" ")
 
         arq = open("redes.json","w")
         arq.write(ujson.dumps(arqload))
@@ -130,13 +135,13 @@ class Connect:
             print("Rede: "+i)
             i = int(i)
             print(arqload[i]["SSID"])
-
-        remove = input("Qual rede deseja remover: ")
+        print("  ")
+        remove = int(input("Qual rede deseja remover: "))
         arqload.pop(remove)
 
         stramount = str(len(arqload))
         print("Lista de redes atualizada...")
-        print("Sua lista contem: "+srtamount+" Redes")
+        print("Sua lista contem: "+stramount+" Redes")
 
         amount = int(len(arqload))
         for i in range (amount):
@@ -149,3 +154,4 @@ class Connect:
         arq = open("redes.json","w")
         arq.write(ujson.dumps(arqload))
         arq.close()
+
