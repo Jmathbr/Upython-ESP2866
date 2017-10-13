@@ -92,11 +92,11 @@ class Connect:
 
 
 
-    def wifi_save(self):
+    def wifi_save(self):    # Metodo de salvar dados
 
-        wlan = network.WLAN(network.STA_IF)             #Configurando wifi
+        wlan = network.WLAN(network.STA_IF)             #Configurando wifi novamente
 
-        arq = open("redes.json").read()
+        arq = open("redes.json").read()                 #abrindo arquivo listas
         arqload = ujson.loads(arq)
 
         print("Redes disponveis: ")
@@ -109,49 +109,67 @@ class Connect:
 
         newdata = {"SSID":newssid,"KEY":newkey}
 
-        arqload.append(newdata)
+        arqload.append(newdata)                 #add novo dado a lista redes
 
         print ("Nova rede adicionada, sua lista atualizada e: ")
-        for i in range (len(arqload)):
+        for i in range (len(arqload)):                  #mostrando lista atualizada
             print(arqload[i]["SSID"])
             print(" ")
 
         arq = open("redes.json","w")
-        arq.write(ujson.dumps(arqload))
-        arq.close()
+        arq.write(ujson.dumps(arqload))                 #sobrecrevendo lista antiga com a nova lista atualizada
+        arq.close()                                     #fechando arq a fim de evitar bugs
     
 
 
-    def wifi_remove(self):
-        arq = open("redes.json").read()
+    def wifi_remove(self):      #metodo de remover dados
+        arq = open("redes.json").read()         #abrindo arquivo que contem as listas
 
         arqload = ujson.loads(arq)
         amount = int(len(arqload))
 
         print("Redes disponiveis")
-        for i in range (amount):
-            i = str(i)
-            print(" ")
-            print("Rede: "+i)
-            i = int(i)
-            print(arqload[i]["SSID"])
+        for i in range (amount):        #mostrando as redes
+            i = str(i)                  #inversao de um inteiro para string
+            print(" ")                  # o objetivo e poder concatenar o texto com isso
+            print("Rede: "+i)           # entao basta converter para string
+            i = int(i)                  # obrigatoriamente tem que trasformar em um inteiro logo apos
+            print(arqload[i]["SSID"])   # caso contrario ira dar erro
         print("  ")
         remove = int(input("Qual rede deseja remover: "))
-        arqload.pop(remove)
+        arqload.pop(remove)             #retorna o valor removido
 
         stramount = str(len(arqload))
         print("Lista de redes atualizada...")
         print("Sua lista contem: "+stramount+" Redes")
 
         amount = int(len(arqload))
-        for i in range (amount):
+        for i in range (amount):        #printa a nova lista
             i = str(i)
             print(" ")
             print("Rede: "+i)
             i = int(i)
             print(arqload[i]["SSID"])
         
-        arq = open("redes.json","w")
+        arq = open("redes.json","w")        #escrevendo a nova lista no arquivo
         arq.write(ujson.dumps(arqload))
         arq.close()
 
+    def wifi_menu(self):
+
+        try:
+            arq = open("redes.json").read()
+        except:
+            print("Verificado, primeira vez debugando o cod")
+            print("Irei mandalo para a configuraçao incial")
+            print("connect manualmente")
+            #chame a funçao wifi_manual
+
+        print("Menu:")
+        print(" ")
+        print("Connection Manual: Digite (M)")
+        print("Save new network: Digite (S)")
+        print("Remove a network : Digite (R)")
+        print("Exit: Digite (E)")
+        option = input("Option:. ")
+        #Fazer um loop para chamar as funcoes acima
