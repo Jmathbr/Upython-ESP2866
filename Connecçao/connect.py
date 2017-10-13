@@ -89,6 +89,8 @@ class Connect:
             if loop == "y":
                 print("\n" * 25)
                 wlan.disconnect()
+            else:
+                break
 
 
 
@@ -160,16 +162,30 @@ class Connect:
         try:
             arq = open("redes.json").read()
         except:
-            print("Verificado, primeira vez debugando o cod")
-            print("Irei mandalo para a configuraçao incial")
-            print("connect manualmente")
-            #chame a funçao wifi_manual
+            print("Menu desabilitado")
+            print("Iniciarei sua comunicaçao com o metodo de connectar manualmente")
+            print(" ")
+            self.wifi_manual()
+            print(" ")
+            print("Menu Habilitado")
+            print(" ")
 
-        print("Menu:")
-        print(" ")
-        print("Connection Manual: Digite (M)")
-        print("Save new network: Digite (S)")
-        print("Remove a network : Digite (R)")
-        print("Exit: Digite (E)")
-        option = input("Option:. ")
-        #Fazer um loop para chamar as funcoes acima
+        option = None
+
+        while option is not ("E"):
+
+            print("Menu:")
+            print(" ")
+            print("Connection Manual: Digite (M)")
+            print("Save new network: Digite (S)")
+            print("Remove a network : Digite (R)")
+            print("Exit: Digite (E)")
+            option = input("Option:. ")
+
+            if option == "M":
+                self.wifi_manual()
+            if option == "S":
+                self.wifi_save()
+            if option == "R":
+                self.wifi_remove()
+            
