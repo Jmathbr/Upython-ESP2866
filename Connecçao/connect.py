@@ -165,7 +165,7 @@ class Connect:
 
 
 
-    def wifi_list():
+    def wifi_list():                        #Metodo para mostrar as redes salvas
         arq = open("redes.json").read()
         arqload = ujson.loads(arq)
 
@@ -182,31 +182,31 @@ class Connect:
 
 
 
-    def wifi_menu(self):
+    def wifi_menu(self):                    #Metodo menu
 
-        try:
+        try:                                #Debugando o codigo pela primeira vez
             arq = open("redes.json").read()
-        except:
+        except:                             #contra medida
             print("Menu desabilitado")
             print("Iniciarei sua comunicaçao com o metodo de connectar manualmente")
             print(" ")
-            self.wifi_manual()
-            print(" ")
+            self.wifi_manual()              #chamando a funcao para configurar manual
+            print(" ")                      #afim de evitar erros
             print("Menu Habilitado")
             print(" ")
 
-        option = None
+        option = None                       #Tratando variavel como vazia, para entrar direto no loop
 
-        while option is not ("E"):
+        while option is not ("E"):          #Medida para sair(exit)
 
-            print("Menu:")
+            print("Menu:")                  #printando o menu
             print(" ")
             print("Connection Manual: Digite (M)")
             print("List network: Digite (L)")
             print("Save new network: Digite (S)")
             print("Remove a network : Digite (R)")
             print("Exit: Digite (E)")
-            option = input("Option:. ")
+            option = input("Option:. ")     #Opcoes disponiveis logo abaixo
 
             if option == "M":
                 self.wifi_manual()
