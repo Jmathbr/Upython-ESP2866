@@ -94,6 +94,8 @@ class Connect:
 
 
 
+
+
     def wifi_save(self):    # Metodo de salvar dados
 
         wlan = network.WLAN(network.STA_IF)             #Configurando wifi novamente
@@ -121,7 +123,9 @@ class Connect:
         arq = open("redes.json","w")
         arq.write(ujson.dumps(arqload))                 #sobrecrevendo lista antiga com a nova lista atualizada
         arq.close()                                     #fechando arq a fim de evitar bugs
-    
+
+
+
 
 
     def wifi_remove(self):      #metodo de remover dados
@@ -157,6 +161,27 @@ class Connect:
         arq.write(ujson.dumps(arqload))
         arq.close()
 
+
+
+
+
+    def wifi_list():
+        arq = open("redes.json").read()
+        arqload = ujson.loads(arq)
+
+        print("Lista de Redes Salvas: ")
+        amount = int(len(arqload))
+            for i in range (amount):        #printa a nova lista
+                i = str(i)
+                print(" ")
+                print("Rede: "+i)
+                i = int(i)
+                print(arqload[i]["SSID"])
+
+
+
+
+
     def wifi_menu(self):
 
         try:
@@ -177,6 +202,7 @@ class Connect:
             print("Menu:")
             print(" ")
             print("Connection Manual: Digite (M)")
+            print("List network: Digite (L)")
             print("Save new network: Digite (S)")
             print("Remove a network : Digite (R)")
             print("Exit: Digite (E)")
@@ -188,4 +214,5 @@ class Connect:
                 self.wifi_save()
             if option == "R":
                 self.wifi_remove()
-            
+            if option == "L":
+                self.wifi_list()
