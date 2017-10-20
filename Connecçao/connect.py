@@ -136,10 +136,8 @@ class Connect:
 
         print("Redes disponiveis")
         for i in range (amount):        #mostrando as redes
-            i = str(i)                  #inversao de um inteiro para string
             print(" ")                  # o objetivo e poder concatenar o texto com isso
-            print("Rede: "+i)           # entao basta converter para string
-            i = int(i)                  # obrigatoriamente tem que trasformar em um inteiro logo apos
+            print("Rede: "+str(i))           # entao basta converter para string
             print(arqload[i]["SSID"])   # caso contrario ira dar erro
         print("  ")
         remove = int(input("Qual rede deseja remover: "))
@@ -165,19 +163,18 @@ class Connect:
 
 
 
-    def wifi_list():                        #Metodo para mostrar as redes salvas
-        arq = open("redes.json").read()
+    def wifi_list(self):                        #Metodo para mostrar as redes salvas
+        arq = open("redes.json").read()         #abrindo arquivo que contem as listas
+
         arqload = ujson.loads(arq)
-
-        print("Lista de Redes Salvas: ")
         amount = int(len(arqload))
-            for i in range (amount):        #printa a nova lista
-                i = str(i)
-                print(" ")
-                print("Rede: "+i)
-                i = int(i)
-                print(arqload[i]["SSID"])
 
+        print("Redes disponiveis")
+        print(" ")
+        for i in range (amount):        #mostrando as redes
+            print("Rede: "+str(i))      #inversao de um inteiro para string
+            print(arqload[i]["SSID"])   # caso contrario ira dar erro
+            print(" ")
 
 
 
