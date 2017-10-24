@@ -4,7 +4,6 @@ import time
 import os
 from machine import Pin
 
-led = Pin(2,Pin.OUT)
 
 class uConnect:
     def __init__(self):
@@ -69,10 +68,7 @@ class uConnect:
                 for i in range(30):                                             #resposta visual
                     if(i%5 == 0 ):
                         print("...")
-                    led.value(1)
-                    time.sleep_ms(300)
-                    led.value(0)
-                    time.sleep_ms(300)
+                    time.sleep_ms(600)
                     if wlan.isconnected() == True:                      #Fique checando se a conneccao foi estabelecida
                         print("Conneccao estabelecida... ")
                         print("Dados coletados: ")
