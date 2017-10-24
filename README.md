@@ -1,7 +1,7 @@
 # uConnect-ESP2866
 Projetos com Micropython usando o ESP2866
 <br>
-"basta colocar o arquivo "Uconnect.py" dentro do esp"
+"basta colocar o arquivo "uconnect.py" dentro do esp"
 <br>
 Funçoes:
 <br>
